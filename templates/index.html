@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>ML API</title>
+  <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Hind:300' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
+  <style>
+    body {
+      font-family: 'Open Sans Condensed', sans-serif;
+      background-color: #f0f0f0; /* Light Gray */
+      color: #333;
+      margin: 0;
+      padding: 0;
+    }
+
+    .login {
+      width: 300px;
+      margin: 50px auto;
+      background-color: #fff; /* White */
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      font-size: 24px;
+      text-align: center;
+      font-family: 'Pacifico', cursive;
+      color: #007BFF; /* Blue */
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+    }
+
+    label {
+      margin-bottom: 5px;
+      font-size: 14px;
+      color: #555;
+    }
+
+    input, select, button {
+      margin-bottom: 10px;
+      padding: 8px;
+      font-size: 14px;
+    }
+
+    button {
+      background-color: #007BFF; /* Blue */
+      color: #fff;
+      cursor: pointer;
+      border: none;
+      border-radius: 4px;
+      transition: background-color 0.3s;
+    }
+
+    button:hover {
+      background-color: #0056b3; /* Darker Blue */
+    }
+
+    .prediction {
+      margin-top: 20px;
+      font-size: 20px; /* Larger font size for predicted text */
+      text-align: center;
+      color: #28a745; /* Green */
+      border: 2px solid #28a745; /* Green border */
+      padding: 10px; /* Increased padding for better visibility */
+      border-radius: 4px; /* Rounded corners */
+    }
+  </style>
+</head>
+<body>
+  <div class="login">
+    <h1>Booking Status Prediction</h1>
+    <!-- Main Input For Receiving Query to our ML -->
+    <form action="{{ url_for('predict')}}" method="post">
+      <label for="lead-time">Lead Time(days):</label>
+      <input type="text" name="lead time" id="lead-time" placeholder="Lead Time" required="required" />
+
+      <label for="average-price">Average Price:</label>
+      <input type="text" name="average price " id="average-price" placeholder="Average Price" required="required" />
+
+      <label for="special-requests">Special Requests:</label>
+      <input type="text" name="special requests" id="special-requests" placeholder="Special Requests" required="required" />
+
+      <label for="number of week nights">Number of Week Nights:</label>
+      <input type="text" name="number of week nights" id="number of week nights" placeholder="Number of Week Nights" required="required" />
+
+      <label for="number of weekend nights">Number of Weekend Nights:</label>
+      <input type="text" name="number of weekend nights" id="number of weekend nights" placeholder="Number of Weekend Nights" required="required" />
+
+      <label for="number-of-adults">Number of Adults:</label>
+      <input type="text" name="number of adults" id="number-of-adults" placeholder="Number of Adults" required="required" />
+
+      <label for="date-of-registration">Date of Registration:</label>
+      <input type="date" name="date of registration" id="date-of-registration" required="required" />
+
+      <label for="market-type-corporate">Market Type Corporate:</label>
+      <div>
+        <label><input type="radio" name="market type_Corporate" value="Yes"> Yes</label>
+        <label><input type="radio" name="market type_Corporate" value="No"> No</label>
+      </div>
+
+      <label for="market-type-complementary">Market Type Complementary:</label>
+      <div>
+        <label><input type="radio" name="market type_Complementary" value="Yes"> Yes</label>
+        <label><input type="radio" name="market type_Complementary" value="No"> No</label>
+      </div>
+
+      <label for="market-type-online">Market Type Online:</label>
+      <div>
+        <label><input type="radio" name="market type_Online" value="Yes"> Yes</label>
+        <label><input type="radio" name="market type_Online" value="No"> No</label>
+      </div>
+
+
+      <label for="repeated">Repeated:</label>
+      <div>
+        <label><input type="radio" name="repeated" value="Yes"> Yes</label>
+        <label><input type="radio" name="repeated" value="No"> No</label>
+      </div>
+
+      <label for="car parking space">Car Parking:</label>
+      <div>
+        <label><input type="radio" name="car_parking_space" value="Yes"> Yes</label>
+        <label><input type="radio" name="car_parking_space" value="No"> No</label>
+      </div>
+
+      <button type="submit" class="btn btn-primary btn-block btn-large">Predict</button>
+    </form>
+    <br>
+    <div class="prediction">
+      {{ prediction_text }}
+    </div>
+  </div>
+</body>
+</html>
